@@ -18,3 +18,11 @@ for i in range(number):
         cnt+=1
         break
 print(cnt)
+
+number=int(input())
+cnt=0
+while number>=0 :
+    cnt+=1
+    number/=10
+cnt+=1
+print(cnt)
