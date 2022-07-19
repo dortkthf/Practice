@@ -30,3 +30,11 @@ for i in range(n):
     if n==0 :
         break
 print(result)
+
+n=int(input())
+result=0
+while n:
+    result = 10*result
+    result+= n%10
+    n//=10
+print(result)
