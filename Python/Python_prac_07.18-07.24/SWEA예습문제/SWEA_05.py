@@ -1,7 +1,6 @@
 n = int(input())
-result=[]
+result=[1]
 for i in range(1,n+1):
-    if n%i == 0 :
-        result.append(i)
+    result.append(2**i)
 for i in result:
     print(i,end=' ')
