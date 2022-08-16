@@ -15,3 +15,6 @@ for i in range(1,T+1):
             price_sum =0
             max_prices_idx = prices[max_prices_idx+1:].index(max(prices[max_prices_idx+1:]))
     print(profit)
+
+
+    
