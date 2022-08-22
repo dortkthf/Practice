@@ -183,4 +183,48 @@ CustomerId  개수
 5           38
 ```
 
+### 14. 각 나라Country 별 고객의 수를 내림차순으로 출력하세요. LIMIT 5
+```sql
+SELECT Country, COUNT(CustomerId) FROM customers GROUP BY Country ORDER BY COUNT(*) DESC LIMIT 5;
 
+Country  COUNT(CustomerId)
+-------  -----------------
+USA      13
+Canada   8
+France   5
+Brazil   5
+Germany  4
+```
+### 15. 각 나라County 별 주문 건수를 건수 기준으로 내림차순으로 출력하세요. LIMIT 10
+```sql
+SELECT C.Country, COUNT(II.InvoiceLineId) FROM customers C JOIN invoices I ON C.CustomerId = I.CustomerId JOIN invoice_items II ON I.InvoiceId = II.InvoiceId 
+GROUP BY C.Country ORDER BY COUNT(II.InvoiceId) DESC LIMIT 10;
+
+Country         COUNT(II.InvoiceId)
+--------------  -------------------
+USA             494
+Canada          304
+France          190
+Brazil          190
+Germany         152
+United Kingdom  114
+Portugal        76
+Czech Republic  76
+India           74
+Sweden          38
+```
+### 16. 2010년 에 주문한 각 나라Country 별 주문 건수를 건수를 기준으로 내림차순으로 출력하세요. LIMIT 10
+```sql
+SELECT C.Country, COUNT(II.InvoiceLineId) FROM customers C JOIN invoices I ON C.CustomerId = I.CustomerId JOIN
+ invoice_items II ON I.InvoiceId = II.InvoiceId WHERE I.InvoiceDate LIKE '2010%' GROUP BY C.Country ORDER BY COUNT(II.InvoiceLineId) DESC LIMIT 10;
+```
+
+### 17.ArtistId, Name, 각 Artist가 낸 tracks의 수 출력, 트랙 수 기준 내림차순, 10개
+```sql
+SELECT A.ArtistId, A.Name, COUNT(C.TrackId)  FROM artists A JOIN albums B ON A.ArtistId = B.ArtistId JOIN tracks C
+ON B.AlbumId = C.AlbumId GROUP BY A.ArtistId ORDER BY COUNT(C.TrackId) DESC 
+LIMIT 10; 
+```
+
+```sql
+ SELECT InvoiceLineId, InvoiceId FROM invoice_items ORDER BY InvoiceId DESC LIMIT 5;
