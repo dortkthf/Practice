@@ -1,4 +1,5 @@
 from django.db import models
+
 class Director(models.Model):
     name = models.TextField()
     debut = models.DateTimeField()
@@ -6,4 +7,3 @@ class Director(models.Model):
 
 class Genre(models.Model):
     title = models.TextField()
-    

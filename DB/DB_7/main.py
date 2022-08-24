@@ -10,3 +10,12 @@ from db.models import *
 # 아래에 코드를 기록하세요.
 # 코드 실행은 터미널에서 shell을 실행시켜서 해주세요. 
 # $ python manage.py shell_plus 
+director = Director.objects.all()
+for dir in director:
+    print(dir.name,dir.debut,dir.country)
+
+data = Director.objects.get(id=1)
+print(data.name,data.debut,data.country)
+
+data = Director.objects.get(country='USA')
+print(data.name,data.debut,data.country)
