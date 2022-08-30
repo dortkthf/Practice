@@ -1,0 +1,36 @@
+/* 아래에 CSS를 작성해주세요. */
+.upper-title {
+    font-size: 12px;
+    text-align: center;
+}
+.middle-title {
+    line-height: 10%;
+    text-align: center;
+}
+.card-list {
+    width: 900px;
+    box-sizing: content-box;
+}
+.card {
+    width: 300px;
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.card-image {
+    width: 300px;
+    border-radius: 5%
+}
+.inner-p-2{
+    font-size: 11px;
+    letter-spacing: -1px;
+}
+.inner-p-1 {
+    font-size: 17px;
+    letter-spacing: -1px;
+    line-height: 50%;
+}
+.inner-p-0 {
+    font-size: 13px;
+}

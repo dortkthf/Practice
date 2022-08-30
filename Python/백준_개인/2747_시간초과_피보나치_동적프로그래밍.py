@@ -39,3 +39,20 @@ n = int(input())
 for i in range(1,n):
     a,b = b, a+b
 print(b)
+
+# 다이나믹 프로그래밍 탑 다운을 통한 문제 해결
+
+n = int(input())
+d = [0]*(n+1)
+
+def fibo(n):
+
+    if n == 0 or n == 1:
+        d[n] = n
+        return d[n]
+    elif d[n] == 0:
+        d[n] = fibo(n-1)+fibo(n-2)
+        return d[n]
+    else:
+        return d[n]
+print(fibo(n))

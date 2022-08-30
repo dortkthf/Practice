@@ -1,0 +1,22 @@
+/* 아래에 CSS를 작성해주세요. */
+.material {
+    width: 300px;
+    border-radius: 3%;
+}
+.basic {
+    width: 300px;
+    letter-spacing: -1px;
+    line-height: 66%;
+}
+.m-name {
+    font-size: 16.5px;
+}
+.m-highlight {
+    color: #35C4EF;
+}
+.m-company {
+    color: #757781;
+}
+.review {
+    color: #9D9DA0;
+}
