@@ -9,14 +9,24 @@
     line-height: 66%;
 }
 .m-name {
-    font-size: 16.5px;
+    font-size: 15px;
+    margin-left: 7px
 }
 .m-highlight {
     color: #35C4EF;
 }
 .m-company {
     color: #757781;
+    margin-left: 7px;
+    font-size: 14px;
 }
 .review {
     color: #9D9DA0;
+    margin-left: 7px
+}
+.price {
+    margin-left: 7px
+}
+.review_score {
+    margin-left: 7px
 }

@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  min-width: 1280px;
+  color: #333333;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  flex-direction: column;
+}
+* {
+  box-sizing: border-box;
+}
+.nav-menu {
+  margin: 0 10px;
+}
+.main-page {
+  text-decoration: none;
+  font-weight:900;
+  color: black
+}
+.main-page:hover {
+  background-color: rgb(79, 76, 76);
+  color: white;
+  border-radius: 3px;
+}
+.nav-each {
+  text-decoration: none;
+  font-weight:900;
+  color: black
+}
+.nav-each:hover {
+  background-color: rgb(79, 76, 76);
+  color: white;
+  border-radius: 3px;
+}
+.nav-list {
+  display: flex
+}
+.nav {
+  width : 1280px;
+  height: 3rem;
+  background-color: white;
+  display: flex;
+  position: sticky;
+  top:0px;
+  justify-content: space-between;
+  align-items: center;
+  border-width : 2px 0px 0px 0px;
+  border-style: solid;
+  border-color: black;
+  padding: 0px 27px;
+  margin: 10px 0px;
+}
+.contents {
+  width: 1280px;
+  justify-content: center;
+  height:700px;
+  background-image:url(../assets/apparel.jpeg);
+  background-size: 1280px;
+  background-repeat: no-repeat;
+}
+.contents2 {
+  width:1280px;
+  display: flex;
+  padding: 40px 70px;
+  
+}
+.contents2 img {
+  width: 500px;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+.contents2-article h2{
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.contents2-article p {
+  line-height: 130%;
+}
+.footer{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 1280px;
+}
+.footer h2 {
+  font-weight: 700;
+  font-size: 2rem;
+}
+.informs{
+  width:1280px;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 20px;
+}
+.inform{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height:120%;
+}
+.inform img{
+  height: 64px;
+  width: 64px;
+}
+.uparrow{
+  position: fixed;
+  width:33px;
+  height:33px;
+  bottom:0px;
+  right:0px;
+}

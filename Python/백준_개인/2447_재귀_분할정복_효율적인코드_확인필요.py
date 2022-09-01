@@ -19,3 +19,5 @@ def stars(n):
 stars(n)
 for s in star:
     print(*s,sep='')
+
+
