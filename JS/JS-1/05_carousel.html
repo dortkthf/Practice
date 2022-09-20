@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container{
+      display: flex;
+      justify-content: center;
+    }
+    .items{
+      width: 15rem;
+      height: 15rem;
+      position:relative;
+      overflow: hidden;
+}
+
+    .item{
+      width: 15rem;
+      height: 15rem;
+      background-color: bisque;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+
+
+    }
+    .active{
+      display: flex;
+    }
+    
+    .prev{
+      background-color: rgba(0, 0, 0, 0);
+      border: 0;
+      font-size: 1.2rem;
+      position: absolute;
+      height: 15rem;
+    }
+    .next{
+      background-color: rgba(0, 0, 0, 0);
+      border: 0;
+      font-size: 1.2rem;
+      position: absolute;
+      right: 0;
+      height: 15rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="items">
+      <button class="prev"><</button>
+      <button class="next">></button>
+      <div class="item active">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+    </div>
+  </div>
+<script>
+  const prev = document.querySelector('.prev')
+  const next = document.querySelector('.next')
+  prev.addEventListener('click', function(){
+    const current = document.querySelector('.active')
+    const items = document.querySelectorAll('.item')
+    const idx = [...items].indexOf(current)
+    current.classList.toggle('active')
+    items[(idx+items.length-1)%items.length].classList.toggle('active')
+  })
+  next.addEventListener('click', function(){
+    const current = document.querySelector('.active')
+    const items = document.querySelectorAll('.item')
+    const idx = [...items].indexOf(current)
+    current.classList.toggle('active')
+    items[(idx+1)%items.length].classList.toggle('active')
+  })
+</script>
+</body>
+</html>
