@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drinks 마셔보자고</title>
+    <style>
+        body {
+            background-color: beige;
+        }
+        .header {
+            background-color: azure;
+            padding: 2rem;
+            border-radius: 2rem;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .title {
+            height: 4rem;
+            background-color: aliceblue;
+            text-align: center;
+            line-height: 4rem;
+            margin-top: 0;
+        }
+        .sub_title {
+            margin: 2 0rem;
+            height: 4rem;
+            line-height: 4rem;
+            background-color: aliceblue;
+            text-align: center;
+
+        }
+        .drink_title {
+            text-align: center;
+            background-color: aliceblue;
+            padding: 2rem;
+        }
+        .drink_img {
+            border-radius: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+            <div class="header">
+                <h1 class="title">마셔 보자고~</h1>
+                <h2 class="sub_title">자 오늘의 음료는?</h2>
+            </div>
+            <h2 class="drink_title">{{ drink }}</h2>
+            <img class="drink_img" src="{{ img }}" alt="{{ drink }}">
+    </div>
+</body>
+</html>
