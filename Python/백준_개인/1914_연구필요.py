@@ -1,10 +1,11 @@
-# 첫 번째 장대에 쌓인 원판의 개수 n
 n = int(input())
-
-fst = []
-snd = []
-thrd = []
-
-for i in range(n,0,-1):
-    fst.append(i)
-print(fst)
+def hanoi(n,a,b,c):
+    if n==1 :
+        print(a,c,sep=' ')
+    else:
+        hanoi(n-1,a,c,b)
+        hanoi(1,a,b,c)
+        hanoi(n-1,b,a,c)
+print(2**n-1)
+if n<=20:
+    hanoi(n,1,2,3)
