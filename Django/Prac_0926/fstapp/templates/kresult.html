@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex flex-column justify-content-center align-items-center p-3">
+    <h1 class="mb-3">당신이 입력한 문단의 수는 {{ pnum }} 개 이고 문단별 단어의 수는 {{ pword }} 개 입니다. </h1>
+    {% for i in pn %}
+    <div class="mb-3">
+        <p>
+            {% for j in pw %}
+            <span>아무단어 </span>
+            {% endfor %}
+        </p>
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock %}

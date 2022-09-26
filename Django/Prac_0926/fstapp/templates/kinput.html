@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="/klorem-result">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">문단의 수</label>
+        <input type="text" class="form-control" placeholder="문단의 수를 입력하세요" name="pnum" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">문단별 단어의 수</label>
+        <input type="text" class="form-control" placeholder="문단별 단어의 수를 입력하세요" name="pword"
+            aria-describedby="emailHelp">
+    </div>
+    <button type="submit" class="btn btn-primary">생성</button>
+</form>
+{% endblock %}

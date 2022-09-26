@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="/past-life-result" class="m-2">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label fw-bold">당신의 이름을 입력하세요</label>
+        <input type="text" name='name' class="form-control" aria-describedby="이름을 입력하세요" placeholder="이름을 입력하세요">
+    </div>
+    <button type="submit" class="btn btn-primary">전생 확인하기</button>
+</form>
+{% endblock %}
