@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="/test2/index-result">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="id">
+        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" name="pw">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<h1>유저들의 정보</h1>
+{% for user in userlist %}
+<p>{{ user }}</p>
+{% endfor %}
+
+{% endblock %}

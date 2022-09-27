@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center fw-bold">자 주어진 숫자가 홀수일까요 짝수일 까요?</h1>
+{% if number|divisibleby:2 %}
+<p class="text-center fw-bold mt-4">{{ number }}는 짝수입니다.</p>
+{% else %}
+<p class="text-center fw-bold mt-4">{{ number }}는 홀수입니다.</p>
+{% endif %}
+{% endblock %}

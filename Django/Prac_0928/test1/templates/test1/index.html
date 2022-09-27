@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="/test1/index-result" method="GET">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">닉네임</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nickname">
+        <div id="emailHelp" class="form-text">사용할 닉네임을 입력하세요.</div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">이메일 주소</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+        <div id="emailHelp" class="form-text">사용할 이메일 주소를 입력해 주세요.</div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">비밀번호</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" name="pw">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<h1>자 여기는 저장된 값들을 나열 할거여 알겄냐?</h1>
+<h2>자 저장된 유저들을 보여줄거여 알것지?</h2>
+{% for user in userlist %}
+<p>유저 닉네임은 {{ user.nickname }} 이고 이메일은 {{ user.email }} 이고 비밀번호는 {{ user.pw }} 이다잉</p>
+{% endfor %}
+{% endblock %}
