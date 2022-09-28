@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>게시판</h1>
+<form action="{% url 'todos:create' %}">
+    <input type="text" name='content' maxlength="10">
+    <input type="submit" value='할 일 추가'>
+</form>
+<h2>할일 목록입니다.</h2>
+<ul>
+    {% for d in data %}
+    <li>{{d.content}} {{d.priority}} {{d.deadline}}
+        <a href="{% url 'todos:delete' d.pk %}">삭제</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

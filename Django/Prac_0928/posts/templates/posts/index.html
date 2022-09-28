@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>게시판</h1>
+
+<ul>
+    {% for read in boarder %}
+    <li>ID : {{ read.id }} 제목 : {{read.title}} 내용 : {{read.content}}
+        <a href="">[수정]</a>
+        <a href="/posts/delete/{{ read.id }}">[삭제]</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'posts:new' %}" style="text-decoration:none">글쓰기</a>
+{% endblock %}
