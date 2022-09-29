@@ -2,13 +2,16 @@
 
 {% block content %}
 <div class="container d-flex flex-column justift-content-center">
+    <!-- 타이틀 -->
     <h1 class="text-center fw-bolder py-5 my-5">심플 Todo List</h1>
     <form action="{% url 'crud:create' %}">
+        <!-- 해야할일 input -->
         <div class="input-group mb-3">
             <span class="input-group-text fw-bold" id="inputGroup-sizing-default">해야할일</span>
             <input type="text" class="form-control" aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-default" maxlength="80" required name="content">
         </div>
+        <!-- 우선순위 input -->
         <div class="input-group mb-3">
             <span class="input-group-text fw-bold" id="inputGroup-sizing-default">우선순위</span>
             <select class="form-select" aria-label="Default select example" name="priority">
@@ -19,11 +22,13 @@
                 <option value="5">5</option>
             </select>
         </div>
+        <!-- 마감기한 input -->
         <div class="input-group mb-3">
             <span class="input-group-text fw-bold" id="inputGroup-sizing-default">마감기한</span>
             <input type="date" class="form-control" aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-default" required name="deadline">
         </div>
+        <!-- 할일추가 btn 위에서 받아온 할일, 우선순위, 마감기한을 name 변수로 받아들인 이후 form action으로 보내서 DB에 저장한다. -->
         <div class="d-grid">
             <button type="submit" class="btn btn-outline-primary btn-lg">할 일 추가</button>
         </div>

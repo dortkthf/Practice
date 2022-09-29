@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex flex-column align-items-center">
+        <h1 class="fw-bold mb-5">Simple 게시판</h1>
+
+        <form action="" class="col-8">
+            <select class="form-select mb-3" aria-label="Default select example" required name="board"
+                value="{{ board }}">
+                <option selected hidden>게시판을 선택해 주세요.</option>
+                <option value="자유게시판">자유 게시판</option>
+                <option value="익명게시판">익명 게시판</option>
+                <option value="질문있어요">질문 있어요</option>
+            </select>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="제목을 입력해주세요" required name="title"
+                    value="{{ title }}">
+            </div>
+            <div class="input-group mb-3">
+                <textarea class="form-control" placeholder="내용을 입력하세요" name="content" rows="11" required
+                    value="{{ content }}"></textarea>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-outline-primary btn-lg col-12 mb-3"
+                    formaction="{% url 'board:create_end' %}">작성하기</button>
+            </div>
+            <div class="d-flex">
+                <button type="submit" class="btn btn-primary btn-lg col-6">수정하기</button>
+                <button type="submit" class="btn btn-danger btn-lg col-6">삭제하기</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
