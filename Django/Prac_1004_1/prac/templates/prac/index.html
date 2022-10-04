@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>게시판</h1>
+<a href="{% url 'prac:create' %}">글 쓰기</a>
+{% for c in crud %}
+<h3><a href="{% url 'prac:detail' c.pk %}">{{ c.title }}</a></h3>
+<p>{{ c.created_at }} | {{ c.updated_at }}</p>
+<hr>
+{% endfor %}
+{% endblock %}

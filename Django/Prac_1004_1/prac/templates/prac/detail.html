@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ crud.pk }} 번 게시글</h1>
+<p> {{ crud.created_at }} | {{ crud.updated_at }} </p>
+<p> {{ crud.content }} </p>
+<a href="{% url 'prac:update' crud.pk %}">수정하기</a>
+<a href="{% url 'prac:delete' crud.pk %}">삭제하기</a>
+{% endblock %}
