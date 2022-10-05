@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
+<h1>정적 이미지</h1>
+<img src="{% static 'prac/다운로드.png' %}" alt="네이버 로고">
+<h1>정적 추가 이미지</h1>
+<img src="{% static 'images/다운로드.png' %}" alt="네이버 로고">
 <h1>게시판</h1>
 <a href="{% url 'prac:create' %}">글 쓰기</a>
 {% for c in crud %}

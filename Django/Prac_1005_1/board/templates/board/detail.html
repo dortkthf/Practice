@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>세부 내용입니다.</h1>
+<h3>{{ board.title }}</h3>
+<p>{{ board.created_at }} | {{ board.updated_at }}</p>
+<p>{{ board.content }}</p>
+<a href="{% url 'board:update' board.pk %}">수정하기</a>
+<a href="{% url 'board:delete' board.pk %}">삭제하기</a>
+<a href="{% url 'board:index' %}">목록으로</a>
+{% endblock %}

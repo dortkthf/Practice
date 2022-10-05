@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h2>정적 이미지 입니다.</h2>
+<img src="{% static 'board/다운로드.png' %}" alt="네이버 로고">
+<h2>정적 추가 이미지 입니다</h2>
+<img src="{% static 'images/다운로드.png' %}" alt="네이버 로고">
+<h1>게시판 목록 페이지</h1>
+<a href="{% url 'board:create' %}">글쓰기</a>
+{% for bor in board %}
+<a href="{% url 'board:detail' bor.pk %}" style="text-decoration: none;">
+    <p>{{ bor.title }} {{ bor.created_at }} | {{ bor.updated_at }}</p>
+</a>
+{% endfor %}
+{% endblock %}
