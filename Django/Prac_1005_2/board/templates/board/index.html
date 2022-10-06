@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<h1>게시판 목록입니다.</h1>
+<a href="{% url 'board:create' %}">글쓰기</a>
+{% for b in board %}
+<h3>{{ b.title }}</h3>
+<p>{{ b.created_at }} | {{ b.updated_at }}</p>
+{% endfor %}
+{% endblock %}

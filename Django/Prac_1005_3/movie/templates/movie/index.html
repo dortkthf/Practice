@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <div class="container my-5">
+    <div class="px-5 mx-5">
+      <h1 class='text-center mb-4'>
+        <img src="{% static 'images/logo.png' %}" style='height: 3rem' class='mb-2'>
+        무비
+      </h1>
+      <table class="table table-hover table-striped mb-3">
+        <thead>
+          <tr>
+            <th scope="col" class='ps-4'>PK</th>
+            <th scope="col" class='ps-4'>영화제목</th>
+            <th scope="col" class='ps-4'>러닝타임</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for mov in movie %}
+            <tr onclick='location.href="detail/{{ mov.pk }}"' style='cursor: pointer;'>
+              <td class='ps-4'>{{ mov.pk }}</td>
+              <td class='ps-4'>{{ mov.title }}</td>
+              <td class='ps-4'>{{ mov.running_time }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class='d-flex justify-content-center'>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+{% endblock %}

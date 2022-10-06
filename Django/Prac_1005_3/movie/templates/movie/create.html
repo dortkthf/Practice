@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+  <div class="container my-5">
+    <div class='px-5 mx-5'>
+      <h1 class='text-center mb-3'>새로운 영화 작성</h1>
+      <form action="" method='POST' class='mb-3 gap-4'>
+        {% csrf_token %}
+        {% bootstrap_form movie_form %}
+        <div class='d-flex'>
+          <button type="submit" class="btn btn-dark w-100">작성하기</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

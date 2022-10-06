@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container my-5">
+    <div class="px-5 mx-5">
+      <p class='text-end mb-3'>{{ movie.running_time }}분</p>
+      <h1 class='fw-bold text-center mb-5'>{{ movie.title }}</h1>
+      <p class='mb-5'>{{ movie.summary }}</p>
+      <div class='d-flex gap-2'>
+        <a href='{% url 'movie:update' movie.pk %}' class="btn btn-outline-success w-50 fw-bold">수정하기</a>
+        <a href='{% url 'movie:delete' movie.pk %}' class="btn btn-outline-danger w-50 fw-bold">삭제하기</a>
+        <a href='{% url 'movie:index' %}' class="btn btn-outline-dark w-50 fw-bold">목록으로</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+  <div class="container my-5">
+    <div class='px-5 mx-5'>
+      <h1 class='text-center mb-3'>수정 페이지</h1>
+      <form action="" method='POST' class='mb-3'>
+        {% csrf_token %}
+        {% bootstrap_form movie_form %}
+        <div class='d-flex gap-2'>
+          <button type="submit" class="btn btn-outline-success w-50 fw-bold">수정하기</button>
+          <a href='{% url 'movie:delete' movie.pk %}' class="btn btn-outline-danger w-50 fw-bold">삭제하기</a>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
