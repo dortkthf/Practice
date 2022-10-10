@@ -5,6 +5,7 @@ from .models import Movie
 # Create your views here.
 def index(request):
     movie = Movie.objects.order_by('-pk')
+    
     context = {
         'movie' : movie
     }
