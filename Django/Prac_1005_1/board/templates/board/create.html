@@ -3,12 +3,12 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-<h1>글쓰기 페이지</h1>
-<form action="" method="POST">
+  <h1>글쓰기 페이지</h1>
+  <form action="" method="POST">
     {% csrf_token %}
     {% bootstrap_form board_form %}
 
-    {% bootstrap_button button_type='submit' content='작성하기' %}
-    {% bootstrap_button button_type='reset' content='다시작성' %}
-</form>
+    {% bootstrap_button button_type = 'submit' content = '작성하기' %}
+    {% bootstrap_button button_type = 'reset' content = '다시작성' %}
+  </form>
 {% endblock %}

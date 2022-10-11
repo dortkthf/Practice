@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h1>게시판 페이지 입니다.</h1>
+  <a href="{% url 'board:create' %}" class="btn btn-primary" >글쓰기</a>
+  <a href="{% url 'accounts:index' %}" class="btn btn-primary" >회원가입</a>
+  {% for bo in board %}
+    <a href="{% url 'board:detail' bo.pk %}"><p>{{ bo.title }} | {{ bo.content }}</p></a>
+  {% endfor %}
+</div>
+{% endblock %}

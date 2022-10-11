@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<div class="container">
+    <h1>디테일 페이지입니다.</h1>
+    <p>{{ board.title }}</p>
+    <p>{{ board.content }}</p>
+    <a href="{% url 'board:update' board.pk %}" class="btn btn-primary">수정하기</a>
+    <a href="{% url 'board:delete' board.pk %}" class="btn btn-primary">삭제하기</a>
+    <a href="{% url 'board:index' %}" class="btn btn-primary" >목록으로</a>
+
+</div>
+{% endblock  %}

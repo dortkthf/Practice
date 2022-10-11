@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<div class="container">
+  <h1>글쓰기 페이지 입니다.</h1>
+  <form action="" method='POST'>
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% bootstrap_button button_type='submit' content='작성하기' %}
+    {% bootstrap_button button_type='reset' content='다시작성' %}
+  </form>
+</div>
+{% endblock %}
