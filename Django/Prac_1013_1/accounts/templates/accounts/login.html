@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Accounts 로그인 페이지 입니다.</h1>
+<form action="" method='POST'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Login">
+</form>
+{% endblock  %}

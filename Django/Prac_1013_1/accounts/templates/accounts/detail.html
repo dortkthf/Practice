@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Hello {{ request.user }}</h1>
+<p>{{ user.last_name }} {{ user.first_name }} 님 환영합니다.</p>
+<p>{{ user.email }} 이메일 주소입니다.</p>
+{% if request.user == user %}
+<a href="{% url 'accounts:update' %}">회원정보 수정</a>
+{% endif %}
+<a href="{% url 'articles:index' %}">초기화면</a>
+{% endblock  %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<div class="container">
+    <h1>로그인창 입니다.</h1>
+    <form action="" method='POST'>
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <div class="d-grid gap-1">
+            <input type="submit" value="로그인" class='btn btn-dark'>
+            <a class='btn btn-success' href='{% url 'accounts:index' %}'>목록으로</a>
+        </div>
+    </form>
+</div>
+{% endblock  %}

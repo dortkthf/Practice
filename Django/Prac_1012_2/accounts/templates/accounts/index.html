@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<div class="container">
+    <h1>회원 목록 창입니다.</h1>
+    {% for user in users %}
+    <div>
+        <a href='{% url 'accounts:detail' user.pk %}'>{{ user.username }}</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock  %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Articles 페이지입니다.</h1>
+    {% if request.user.is_authenticated %}
+        <h3>Hello {{ request.user }}</h3>
+        <a href="{% url 'accounts:logout' %}">Logout</a>
+        <a href="{% url 'accounts:update' %}">회원정보 수정</a>
+        <a href="{% url 'articles:create' %}">글쓰기</a>
+    {%  else %}    
+        <a href="{% url 'accounts:login' %}">Login</a>  
+        <a href="{% url 'accounts:signup' %}">회원가입</a>
+        <a href="{% url 'articles:create' %}">글쓰기</a>
+    {% endif %}
+    {% for u in user %}
+    <div>
+        <a href="{% url 'accounts:detail' u.pk %}">{{ u.username }}</a>
+    </div>
+    {% endfor %}
+{% endblock  %}
