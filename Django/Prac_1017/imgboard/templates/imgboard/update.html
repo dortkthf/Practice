@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<h1 class="text-center">업데이트 페이지입니다.</h1>
+<form action="{% url 'imgboard:update' pk %}" method='POST' enctype='multipart/form-data'>
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <input type="submit" value="수정하기" class='btn btn-primary mb-2'>
+</form>
+<div>
+    <a href="{% url 'imgboard:index' %}" class='btn btn-success'>뒤로가기</a>
+    <a href="" class='btn btn-danger'>삭제하기</a>
+</div>
+{% endblock  %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<h1 class='text-center my-4'>imgboard index입니다</h1>
+<a href="{% url 'imgboard:create' %}" class='btn btn-primary'>글쓰기</a>
+<div class="row g-4">
+    {% for img in imgs %}
+    <div class="col-4">
+        <div class="card" style="width: 18rem;">
+            {% if img.image %}
+            <img src="{{ img.image.url }}" class="card-img-top" alt="img.image">
+            {% endif %}
+            <div class="card-body">
+            {% if img.image %}
+            <h5 class="card-title">{{ img.title }}</h5>
+            <p class="card-text">{{ img.content }}</p>
+            {% endif %}
+            <a href="{% url 'imgboard:detail' img.pk %}" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock  %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<h1 class='text-center'>상세 페이지</h1>
+<h3>제목 : {{ img.title }}</h3>
+<p>내용 : {{ img.content }}</p>
+{% if img.image %}
+<img src="{{img.image.url}}" alt="img.image">
+{% endif %}
+<div>
+    <a href="{% url 'imgboard:index' %}" class='btn btn-primary'>뒤로가기</a>
+    <a href="{% url 'imgboard:update' img.pk %}" class='btn btn-warning'>수정하기</a>
+    <a href="{% url 'imgboard:delete' img.pk %}" class='btn btn-danger'>삭제하기</a>
+</div>
+{% endblock  %}
