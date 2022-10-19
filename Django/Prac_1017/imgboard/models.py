@@ -1,3 +1,4 @@
+from tkinter import CASCADE
 from django.db import models
 from imagekit.models import ProcessedImageField
 from imagekit.processors import Thumbnail
@@ -14,3 +15,7 @@ class Imgboard(models.Model):
         format='JPEG',
         options={'quiality' : 90 },
     )
+
+class Comments(models.Model):
+    content = models.TextField()
+    imgboard = models.ForeignKey(Imgboard, on_delete=models.CASCADE)

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<div class="container">
+    <h1>글작성 페이지입니다.</h1>
+    <form action="{% url 'articles:create' %}" method='POST', enctype='multipart/form-data'>
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <div>
+            <input type="submit" value="작성하기" class='btn btn-primary'>
+            <a href="{% url 'articles:index' %}" class='btn btn-success'>뒤로가기</a>
+        </div>
+    </form>
+</div>
+{% endblock  %}

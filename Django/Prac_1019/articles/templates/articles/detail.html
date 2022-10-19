@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<h1>상세 페이지</h1>
+<h1>
+    {{ article.title }}
+</h1>
+<p>
+    {{ article.content }}
+</p>
+{% if article.pimage  %}
+<img src="{{ article.pimage.url }}" alt="{{ article.image }}">
+{% elif article.image %}
+<img src="{{ article.image.url }}" alt="{{ article.image }}">
+{% endif %}
+<h4>댓글</h4>
+{% if request.user.is_authenticated %}
+<form action="{% url 'articles:detail' article.pk %}" method='POST'>
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <input type="submit" value="댓글장성">
+</form>
+<h3>댓글목록</h3>
+{% for c in comments %}
+<p><a href="{% url 'accounts:detail' %}">
+    {{ c.user.username }}
+</a> | {{ c.content }}</p>
+{% endfor %}
+{% endif %}
+<div>
+    <a href="{% url 'articles:index' %}">목록으로</a>
+    <a href="{% url 'articles:update' article.pk %}">수정하기</a>
+    <a href="{% url 'articles:delete' article.pk %}">삭제하기</a>
+</div>
+{% endblock  %}

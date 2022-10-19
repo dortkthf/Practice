@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import ImgForm
+from .forms import ImgForm, CommentForm
 from .models import Imgboard
 # Create your views here.
 def index(request):
@@ -24,8 +24,18 @@ def create(request):
 
 def detail(request, pk):
     img = Imgboard.objects.get(pk=pk)
+    if request.method == 'POST':
+        commentForm = CommentForm(request.POST)
+        if commentForm.is_valid():
+            comment = commentForm.save(commit=False)
+            comment.imgboard = img
+            comment.save()
+        return redirect('imgboard:detail' ,img.pk)
+    else:
+        commentForm = CommentForm()
     context = {
         'img' : img,
+        'commentForm' : commentForm,
     }
     return render(request, 'imgboard/detail.html', context)
 

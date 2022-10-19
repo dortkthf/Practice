@@ -7,6 +7,17 @@
 {% if img.image %}
 <img src="{{img.image.url}}" alt="img.image">
 {% endif %}
+<form action="{% url 'imgboard:detail' img.pk %}" method='POST'>
+    {% csrf_token %}
+    {% bootstrap_form commentForm layout='inline' %}
+    <input type="submit" value="댓글작성">
+</form>
+{% for c in img.comments_set.all %}
+<p>
+    {{ c.content }}
+    <hr>
+</p>
+{% endfor %}
 <div>
     <a href="{% url 'imgboard:index' %}" class='btn btn-primary'>뒤로가기</a>
     <a href="{% url 'imgboard:update' img.pk %}" class='btn btn-warning'>수정하기</a>
