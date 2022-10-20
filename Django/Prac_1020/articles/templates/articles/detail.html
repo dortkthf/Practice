@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<h1>articles detail 페이지</h1>
+<div>
+    <h3>{{ article.title }}</h3>
+    <p>{{ article.content }}</p>
+    <div>
+        {% if article.image %}
+        <img src="{{ article.image.url }}" alt="{{ article.image }}" style='width:40rem'>
+        {% endif %}
+    </div>
+    <div>
+        {% if request.user.is_authenticated %}
+        <form action="{% url 'articles:detail' article.pk %}" method='POST' class='row'>
+            {% csrf_token %}
+            <div class='col-10'>
+                {% bootstrap_form form %}
+            </div>
+            <div class='col-2 d-grid' style="padding-top:2rem;height:1.3rem">
+                <input type="submit" value="댓글작성" class="btn btn-light">
+            </div>
+        </form>
+        {% endif %}
+        <h3>댓글목록</h3>
+        {% for c in comment %}
+        <p> <a href="{% url 'accounts:detail' c.user.pk %}" class='btn btn-light'>{{ c.user }}</a> | {{ c.content }} | {% if request.user == c.user %}<a href="{% url 'articles:c_delete' article.pk c.pk %}" class='btn mx-2'>삭제하기</a>{% endif %}</p>
+        {% empty %}
+        <p><b>댓글이 없습니다.</b></p>
+        {% endfor %}
+    </div>
+    <div>
+        {% if request.user == article.user %}
+        <a href="{% url 'articles:update' article.pk %}" class='btn me-2'>수정하기</a>
+        <a href="{% url 'articles:delete' article.pk %}" class='btn me-2'>삭제하기</a>
+        {% endif %}
+        <a href="{% url 'articles:index' %}" class='btn'>목록으로</a>
+    </div>
+</div>
+{% endblock  %}

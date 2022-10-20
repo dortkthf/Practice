@@ -18,18 +18,24 @@
 <form action="{% url 'articles:detail' article.pk %}" method='POST'>
     {% csrf_token %}
     {% bootstrap_form form %}
-    <input type="submit" value="댓글장성">
+    <input type="submit" value="댓글작성">
 </form>
+{% endif %}
 <h3>댓글목록</h3>
 {% for c in comments %}
-<p><a href="{% url 'accounts:detail' %}">
-    {{ c.user.username }}
-</a> | {{ c.content }}</p>
-{% endfor %}
+<p class='mb-2'>{{ c.user.username }} | {{ c.content }}
+{% if request.user == c.user %}
+<a href="{% url 'articles:c_delete' article.pk  c.pk  %}" class='btn btn-primary'>삭제</a>
+<a href="{% url 'articles:c_update' article.pk c.pk %}" class='btn'>수정</a>
 {% endif %}
+</p>
+
+{% endfor %}
 <div>
     <a href="{% url 'articles:index' %}">목록으로</a>
+    {% if article.user == request.user %}
     <a href="{% url 'articles:update' article.pk %}">수정하기</a>
+    {% endif %}
     <a href="{% url 'articles:delete' article.pk %}">삭제하기</a>
 </div>
 {% endblock  %}

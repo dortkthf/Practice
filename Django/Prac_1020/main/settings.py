@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-o@!qd!vn64nt5qkxr6-&jsc02%r@*)=l(-yp#z^qrvidf7py3m'
+SECRET_KEY = 'django-insecure-svcuv&#c5fzw498r0a%jmej13j(r)@0ng06-$3z!&-5ts!e@gn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'articles',
     'accounts',
+    'django_extensions',
     'django_bootstrap5',
     'imagekit',
     'django.contrib.admin',
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'main.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR/'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,5 +134,3 @@ AUTH_USER_MODEL = 'accounts.User'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 MEDIA_URL = '/media/'
-
-MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'

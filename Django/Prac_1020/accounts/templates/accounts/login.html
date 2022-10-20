@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<h1>Signup 페이지</h1>
+<form action="" method='POST'>
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <div>
+        <input type="submit" value="로그인" class='btn me-2'>
+        <a href="{% url 'accounts:signup' %}" class='btn me-2'>회원가입</a>
+        <a href="{% url 'accounts:index' %}" class='btn'>목록으로</a>
+    </div>
+</form>
+{% endblock  %}

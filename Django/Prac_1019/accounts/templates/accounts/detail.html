@@ -2,16 +2,16 @@
 {% load django_bootstrap5 %}
 {% block content %}
 <h1>accounts 상세 페이지</h1>
-<h3>{{ request.user }}님의 상세 페이지</h3>
-<p>{{ request.user.email }}</p>
-<p>{{ request.user.last_name }} {{ request.user.first_name }}</p>
+<h3>{{ user }}님의 상세 페이지</h3>
+<p>{{ user.email }}</p>
+<p>{{ user.last_name }} {{ user.first_name }}</p>
 <div class="row">
     <div class="col-6">
         <h5>작성한 글</h5>
         <p>{{ user.article_set.count }}개 작성하였습니다.</p>
         {% for article in user.article_set.all %}
         <div>
-            <a href="{% url 'articles:detail' article.pk %}" class='btn btn-light'>{{ article.title }}</a>
+            <a href="{% url 'articles:detail' article.pk %}" class='btn btn-light mb-1'>{{ article.title }}</a>
         </div>
         {% endfor %}
     </div>
@@ -20,7 +20,7 @@
         <p>{{ user.comment_set.count }}개 작성하였습니다.</p>
         {% for comment in user.comment_set.all %}
         <div>
-            <a href="{% url 'articles:detail' comment.article.pk %}" class='btn'>
+            <a href="{% url 'articles:detail' comment.article.pk %}" class='btn btn-light mb-1'>
                 {{ comment.content }}
             </a>
         </div>
@@ -28,7 +28,9 @@
     </div>
 </div>
 <div>
+    {% if request.user == user %}
     <a href="{% url 'accounts:userupdate' %}" class='btn me-2'>회원정보 수정</a>
+    {% endif %}
     <a href="{% url 'accounts:index' %}" class='btn'>목록으로</a>
 </div>
 {% endblock  %}

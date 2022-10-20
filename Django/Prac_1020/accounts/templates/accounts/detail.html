@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<h1>accounts detail 페이지</h1>
+<h3>{{ user }}님의 페이지</h3>
+<p>{{ user.email }}</p>
+<p>{{ user.first_name }}</p>
+<p>{{ user.last_name }}</p>
+<div class="row">
+    <div class="col-6">
+        <h1>작성한 글 목록</h1>
+        <p>{{ user.article_set.count }}개 작성하였습니다.</p>
+        {% for article in user.article_set.all %}
+        <div>
+            <a href='{% url 'articles:detail' article.pk %}' class='btn btn-light m-2'>{{ article.title }}</a>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="col-6">
+        <h1>작성한 댓글 목록</h1>
+        <p>{{ user.comments_set.count }}개 작성하였습니다.</p>
+        {% for comment in user.comments_set.all %}
+        <div>
+            <a href="{% url 'articles:detail' comment.article.pk %}" class="btn btn-light m-2">{{ comment.content }}</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div>
+    {% if request.user == user %}
+    <a href="{% url 'accounts:update' %}" class='btn me-2'>회원정보 수정</a>
+    {% endif %}
+    <a href="{% url 'articles:index' %}" class='btn'>뒤로가기</a>
+</div>
+{% endblock  %}

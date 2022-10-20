@@ -1,6 +1,9 @@
+
 from django.shortcuts import render, redirect
 from .forms import ArticleForm, CommentForm
-from .models import Article
+from .models import Article, Comment
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 # Create your views here.
 
 def index(request):
@@ -10,6 +13,7 @@ def index(request):
     }
     return render(request,'articles/index.html', context)
 
+@login_required
 def create(request):
     if request.method=='POST':
         form = ArticleForm(request.POST, request.FILES)
@@ -44,12 +48,14 @@ def detail(request, pk):
     }
     return render(request, 'articles/detail.html', context)
 
+@login_required
 def update(request, pk):
     article = Article.objects.get(pk=pk)
     if request.method=='POST':
         form = ArticleForm(request.POST, request.FILES, instance=article)
         if form.is_valid():
             form.save()
+            messages.success(request, '수정 완료')
             return redirect('articles:detail', pk)
     else:
         form = ArticleForm(instance=article)
@@ -59,7 +65,36 @@ def update(request, pk):
     }
     return render(request, 'articles/update.html', context)
 
+@login_required
 def delete(request, pk):
     article = Article.objects.get(pk=pk)
-    article.delete()
-    return redirect('articles:index')
+    if request.user == article.user:
+        article.delete()
+        return redirect('articles:index')
+    else:
+        messages.warning(request, '회원정보가 일치하지 않습니다.')
+        return redirect('articles:detail', article.pk)
+
+@login_required
+def c_delete(request, a_pk, c_pk):
+    comment = Comment.objects.get(pk=c_pk)
+    if request.user == comment.user:
+        comment.delete()
+    return redirect('articles:detail', a_pk)
+
+def c_update(request, a_pk, c_pk):
+    article = Article.objects.get(pk=a_pk)
+    comments = Comment.objects.get(pk=c_pk)
+    if request.method == 'POST':
+        form = CommentForm(request.POST, instance=comments)
+        if form.is_valid():
+            form.save()
+            return redirect('articles:detail', a_pk)
+    else:
+        form = CommentForm(instance=comments)
+    context = {
+        'form' : form,
+        'article' : article,
+        'comments' : comments
+    }
+    return render(request, 'articles/c_update.html', context)
