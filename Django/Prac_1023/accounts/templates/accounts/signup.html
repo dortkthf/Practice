@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<div class='d-flex justify-content-center m-5'>
+    <div class='col-12 col-sm-9 col-md-7 col-lg-5'>
+
+        <h1 class='text-center mb-5 fw-bold'>오픈게시판 회원가입</h1>
+        <form action="{% url 'accounts:signup' %}" method='POST'>
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <div class="d-grid">
+                <input type="submit" value="회원가입" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock  %}
