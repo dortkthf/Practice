@@ -4,20 +4,20 @@
 <div class="d-flex justify-content-center">
     <div class="col-10 col-sm-7 my-5">
         <h1 class='text-center fw-bold mb-5'>오픈 정리 작성</h1>
-        <form action="{% url 'articles:create' %}" method='POST' enctype = 'multipart/form-data'>
+        <form action="{% url 'articles:update' article.pk %}" method='POST' enctype = 'multipart/form-data'>
             <label for="select" class='form-label'>카테고리</label>
             <select class="form-select mb-3" aria-label="Default select example" name='category' id='select'>
                 <option value="Python">Python</option>
                 <option value="Django">Django</option>
-                <option value="JavaScript">JavaScript</option>
-                <option value="SQL">SQL</option>
-                <option value="CSS">CSS</option>
-                <option value="HTML">HTML</option>
+                <option value="Javascript">JavaScript</option>
+                <option value="Sql">SQL</option>
+                <option value="Css">CSS</option>
+                <option value="Html">HTML</option>
               </select>
             {% csrf_token %}
             {% bootstrap_form form %}
             <div class='d-grid'>
-                <input type="submit" value="작성" class="btn btn-primary">
+                <input type="submit" value="수정하기" class="btn btn-primary">
             </div>
         </form>
     </div>

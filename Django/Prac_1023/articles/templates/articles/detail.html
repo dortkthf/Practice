@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<div class="d-flex justify-content-center">
+    <div class="col-10 col-sm-7 my-5">
+        <h1 class='text-center fw-bold mb-5'>자세한 내용</h1>
+        <hr>
+        {% if article.category %}
+        <p>{{ article.category }}</p>
+        {% endif %}
+        <h1>{{ article.title }}</h1>
+        <p>{{ article.content }}</p>
+        {% if article.image %}
+        <img src="{{ article.image.url }}" alt="{{ article.image }}" class='my-5'>
+        {% endif %}
+        <div class="d-flex gap-1">
+            <a href="{% url 'articles:update' article.pk %}" class='btn btn-primary col-4'>수정하기</a>
+            <a href="{% url 'articles:delete' article.pk %}" class='btn btn-danger col-4'>삭제하기</a>
+            <a href="{% url 'articles:index' %}" class='btn btn-warning col-4'>홈으로</a>
+        </div>
+    </div>
+</div>
+{% endblock  %}

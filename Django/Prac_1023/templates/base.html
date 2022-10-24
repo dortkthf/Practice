@@ -175,12 +175,13 @@
         <form action="" role='search'>
             <input type="search" id="mySearch" type="search" placeholder="Search.." title="Type in a category">
         </form>
-        <a href="#">HTML</a>
-        <a href="#">CSS</a>
-        <a href="#">JavaScript</a>
-        <a href="#">Python</a>
-        <a href="#">Django</a>
-        <a href="#">SQL</a>
+        <a href="{% url 'articles:index' %}">HOME</a>
+        <a href="{% url 'articles:python' %}">Python</a>
+        <a href="{% url 'articles:django' %}">Django</a>
+        <a href="{% url 'articles:javascript' %}">JavaScript</a>
+        <a href="{% url 'articles:sql' %}">SQL</a>
+        <a href="{% url 'articles:css' %}">CSS</a>
+        <a href="{% url 'articles:html' %}">HTML</a>
     </div>
 
     <script>
