@@ -4,9 +4,14 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login, logout as auth_logout
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
+from .models import User
 # Create your views here.
 def index(request):
-    return render(request, 'accounts/index.html')
+    users = User.objects.all()
+    context = {
+        'users' : users,
+    }
+    return render(request, 'accounts/index.html', context)
 
 def signup(request):
     if request.method == 'POST':
@@ -38,8 +43,12 @@ def logout(request):
     auth_logout(request)
     return redirect('accounts:index')
 
-def detail(request):
-    return render(request, 'accounts/detail.html')
+def detail(request, pk):
+    user = User.objects.get(pk=pk)
+    context = {
+        'user' : user,
+    }
+    return render(request, 'accounts/detail.html', context)
 
 def update(request):
     if request.method == 'POST':
@@ -72,3 +81,12 @@ def delete(request):
     request.user.delete()
     auth_logout(request)
     return redirect('accounts:index')
+
+def follow(request, pk):
+    user = User.objects.get(pk=request.user.pk)
+    other = User.objects.get(pk=pk)
+    if user in other.followers.all():
+        user.followings.remove(other)
+    else:
+        user.followings.add(other) 
+    return redirect('accounts:detail', pk)

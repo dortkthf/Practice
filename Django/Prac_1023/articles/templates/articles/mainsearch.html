@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="row col-10 justify-content-center">
+        <h1 class='text-center mt-4 fw-bold'>        
+            {% if search %}
+            {{ search }} 
+            {% else %}
+            모든
+            {% endif %}
+            <span class='fw-light small'>에 대한 검색결과 입니다.</span></h1></h1>
+        <div class='row g-3 m-4'>
+          {% for article in page_list %}
+          <div class="col-sm-12 col-md-6 col-lg-4 ">
+            <div class="card">
+              {% if article.image %}
+              <img src="{{ article.image.url }}" class="card-img-top" alt="...">
+              {% else %}
+              <img src="{% static 'images/dummy-image-square.jpg' %}" class="card-img-top" alt="">
+              {% endif %}
+                    <div class="card-body">
+                      {% if article.category %}
+                      <h5 class="card-title fw-bold mb-3">{{ article.category }}</h5>
+                      {% endif %}
+                      <h5 class="card-title">{{ article.title }}</h5>
+                      <p class="card-text">{{ article.content }}</p>
+                      <div class="d-grid">  
+                        <a href="{% url 'articles:detail' article.pk %}" class="btn btn-dark">자세히</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>  
+                {% endfor %}
+              </div>
+              <ul class="pagination justify-content-center">
+                <!-- 이전 페이지 -->
+                {% if page_list.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?mainsearch={{ search }}&#38;page={{ page_list.previous_page_number }}">이전</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+                    </li>
+                {% endif %}
+            
+                <!-- 페이지 리스트 -->
+                {% for page_number in paginator.page_range %}
+                    {% if page_number == page_list.number %}
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="?mainsearch={{ search }}&#38;page={{ page_number }}">{{ page_number }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?mainsearch={{ search }}&#38;page={{ page_number }}">{{ page_number }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            
+                <!-- 다음페이지 -->
+                {% if page_list.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?mainsearch={{ search }}&#38;page={{ page_list.next_page_number }}">다음</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+                    </li>
+                {% endif %}
+</div>
+{% endblock  %}

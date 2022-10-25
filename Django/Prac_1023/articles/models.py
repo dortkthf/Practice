@@ -20,3 +20,9 @@ class Article(models.Model):
         format = 'JPEG',
         options = {'quality' : 90},
     )
+
+class Comment(models.Model):
+    content = models.CharField(max_length=200)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    article = models.ForeignKey(Article,
+    on_delete=models.CASCADE, related_name='comments')

@@ -1,11 +1,19 @@
+
 from django.shortcuts import render, redirect
-from .forms import ArticleForm
-from .models import Article
+from .forms import ArticleForm, CommentForm
+from .models import Article, Comment
+from django.core.paginator import Paginator
 # Create your views here.
 def index(request):
     articles = Article.objects.order_by('-pk')
+    # 페이지네이션
+    page = request.GET.get('page')
+    paginator = Paginator(articles, 3)
+    page_obj = paginator.get_page(page)
     context = {
         'articles' : articles,
+        'page_list' : page_obj,
+        'paginator' : paginator,
     }
     return render(request, 'articles/index.html', context)
 
@@ -28,8 +36,21 @@ def create(request):
 
 def detail(request, pk):
     article = Article.objects.get(pk=pk)
+    if request.method =='POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            forms = form.save(commit=False)
+            forms.user = request.user
+            forms.article = article
+            forms.save()
+            return redirect('articles:detail', pk)
+    else:
+        form = CommentForm()
+    comments = article.comments.order_by('-pk')
     context = {
         'article' : article,
+        'form' : form,
+        'comments' : comments,
     }
     return render(request, 'articles/detail.html', context)
 
@@ -97,3 +118,94 @@ def html(request):
         'articles' : articles,
     }
     return render(request,'articles/html.html', context)
+
+def search(request):
+    search = request.GET.get('search')
+    ctg = request.GET.get('category')
+
+    if ctg == 'Python':
+        articles = Article.objects.filter(
+            category=ctg,
+            content__contains=search
+            ) | Article.objects.filter(
+            category=ctg,
+            title__contains=search
+            )
+    elif ctg == 'Django':
+        articles = Article.objects.filter(
+            category=ctg,
+            content__contains=search
+            ) | Article.objects.filter(
+            category=ctg,
+            title__contains=search
+            )    
+    elif ctg == 'JavaScript':
+        articles = Article.objects.filter(
+            category=ctg,
+            content__contains=search
+            ) | Article.objects.filter(
+            category=ctg,
+            title__contains=search
+            )
+    elif ctg == 'SQL':
+        articles = Article.objects.filter(
+            category=ctg,
+            content__contains=search
+            ) | Article.objects.filter(
+            category=ctg,
+            title__contains=search
+            )
+    elif ctg == 'CSS':
+        articles = Article.objects.filter(
+            category=ctg,
+            content__contains=search
+            ) | Article.objects.filter(
+            category=ctg,
+            title__contains=search
+            )
+    elif ctg == 'HTML':
+        articles = Article.objects.filter(
+            category=ctg,
+            content__contains=search
+            ) | Article.objects.filter(
+            category=ctg,
+            title__contains=search
+            )
+    page = request.GET.get('page')
+    paginator = Paginator(articles, 3)
+    page_obj = paginator.get_page(page)            
+    context = {
+        'articles' : articles,
+        'ctg' : ctg,
+        'search' : search,
+        'page_list' : page_obj,
+        'paginator' : paginator,
+    }
+    return render(request, 'articles/search.html', context)
+
+def mainsearch(request):
+    search = request.GET.get('mainsearch')
+    articles = Article.objects.filter(title__contains=search) | Article.objects.filter(content__contains=search)
+    page = request.GET.get('page')
+    paginator = Paginator(articles, 3)
+    page_obj = paginator.get_page(page)  
+    context = {
+        'articles' : articles,
+        'search' : search,
+        'page_list' : page_obj,
+        'paginator' : paginator,
+    }
+    return render(request, 'articles/mainsearch.html', context)
+
+def c_delete(request, a_pk, c_pk):
+    comment = Comment.objects.get(pk=c_pk)
+    comment.delete()
+    return redirect('articles:detail', a_pk)
+
+def like(request, pk):
+    article = Article.objects.get(pk=pk)
+    if article in request.user.like_articles.all():
+        article.like_users.remove(request.user)
+    else:
+        article.like_users.add(request.user)
+    return redirect('articles:detail', pk)

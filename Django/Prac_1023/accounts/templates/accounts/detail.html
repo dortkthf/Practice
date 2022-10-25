@@ -1,20 +1,115 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 {% block content %}
-<div class='d-flex justify-content-center m-5'>
-    <div class='col-12 col-sm-9 col-md-7 col-lg-5'>
-
-        <h1 class='mb-5 fw-bold'>{{ request.user }} 님의 회원정보</h1>
-        <div>
-            <p>{{ user.username }}</p>
-            <p>{{ user.email }}</p>
-            <p>{{ user.last_name }}</p>
-            <p>{{ user.first_name }}</p>
+    <div class="row justify-content-center mx-5">
+        <div class="col-6 my-5">
+            <h1>회원 이미지</h1>
         </div>
-        <div class="d-flex gap-2">
-            <a href="{% url 'accounts:update' %}" class='btn btn-primary col-5'>회원정보 수정</a>
-            <a href="{% url 'accounts:delete' %}" class='btn btn-danger col-5'>계정삭제</a>
+        <div class="col-6 my-5">
+            <h1 class='mb-5 fw-bold'>{{ user.username }} 님의 회원정보</h1>
+
+            <div class='row'>
+                <div class='col-4'>
+                    <span class='text-primary'>팔로워</span><span class='fw-bold'>{{ user.followers.all|length }}</span>
+                </div>
+                <div class='col-4'>
+                    <span class='text-primary'>팔로잉</span><span class='fw-bold'>{{ user.followings.all|length }}</span>
+                </div>
+                <div class="col-4">
+                    {% if user == request.user %}
+                    {% else %}
+                    {% if user in request.user.followings.all %}
+                    <a href="{% url 'accounts:follow' user.pk %}" class='btn btn-outline-primary mb-3'>팔로우취소</a>
+                    {% else %}
+                    <a href="{% url 'accounts:follow' user.pk %}" class='btn btn-primary mb-3'>팔로우하기</a>
+                    {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            <div>
+                <p>{{ user.username }}</p>
+                <p>{{ user.email }}</p>
+                <p>{{ user.last_name }}</p>
+                <p>{{ user.first_name }}</p>
+            </div>
+            {% if user == request.user %}
+            <div class="d-flex gap-2">
+                <a href="{% url 'accounts:update' %}" class='btn btn-primary col-5'>회원정보 수정</a>
+                <a href="{% url 'accounts:delete' %}" class='btn btn-danger col-5'>계정삭제</a>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-12 row justify-content-center">
+            <div class="col-8">
+
+                <h4 class='text-center my-5'><span class='fw-bold'>{{ user }}</span> 님이 작성한 글</h4>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">카테고리</th>
+                            <th scope="col">제목</th>
+                            <th scope="col">작성시간</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for article in user.article_set.all %}
+                    <tr onclick='location.href="{% url 'articles:detail' article.pk %}"' style='cursor:pointer'>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ article.category }}</td>
+                        <td>{{ article.title }}</td>
+                        <td>{{ article.created_at }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-4">
+            <h4 class='text-center my-5'>좋아요한 글</h4>
+            {% for article in user.like_articles.all %}
+            <div class='text-center'>
+                <a href="{% url 'articles:detail' article.pk %}" class='btn btn-light'>
+                    {{ article.title }}
+                </a>
+            </div>
+            {% endfor %}
         </div>
     </div>
-</div>
+        <div class="row my-5">
+            <div class="col-6">
+                <h4 class='text-center my-5'><span class='fw-bold'>{{ user }}</span> 님이 작성한 댓글</h4>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">내용</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for comment in user.comment_set.all %}
+                        <tr onclick='location.href="{% url 'articles:detail' comment.article.pk %}"'>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ comment.content }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-6 row">
+                <div class="col-6">
+                    <h4 class='text-center my-5'>팔로워</h4>
+                    {% for user in user.followers.all %}
+                    <p class='fw-bold text-center'><a href="{% url 'accounts:detail' user.pk %}" class='btn btn-light'>{{ user }}</a></p>
+                    {% endfor %}
+                </div>
+                <div class="col-6">
+                    <h4 class='text-center my-5'>팔로워</h4>
+                    {% for user in user.followings.all %}
+                    <p class="fw-bold text-center"><a href="{% url 'accounts:detail' user.pk %}" class='btn btn-light'>{{ user }}</a></p>
+                    {% endfor %}
+                </div>
+        </div>
+            
+        </div>
+    </div>
 {% endblock  %}

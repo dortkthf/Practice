@@ -15,4 +15,8 @@ urlpatterns = [
     path('sql/', views.sql, name='sql'),
     path('css/', views.css, name='css'),
     path('html/', views.html, name='html'),
+    path('search/', views.search, name='search'),
+    path('mainsearch/', views.mainsearch, name='mainsearch'),
+    path('<int:a_pk>/comment/<int:c_pk>', views.c_delete, name='c_delete'),
+    path('like/<int:pk>', views.like, name='like'),
 ]

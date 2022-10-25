@@ -13,6 +13,42 @@
         {% if article.image %}
         <img src="{{ article.image.url }}" alt="{{ article.image }}" class='my-5'>
         {% endif %}
+        <br>
+        <br>
+
+        <div class='text-center'>
+            {% if request.user in article.like_users.all %}
+            <a href="{% url 'articles:like' article.pk %}" class='btn btn-outline-warning text-end'>좋아요취소{{ article.like_users.count }}</a>
+            {% else %}
+            <a href="{% url 'articles:like' article.pk %}" class='btn btn-warning text-end'>좋아요 {{ article.like_users.count }}</a>
+            {% endif %}
+        </div>
+        <br>
+        <form action="{% url 'articles:detail' article.pk %}" method='POST'>
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-10 pe-0">
+                    {% bootstrap_form form %}
+                </div>
+                <div class="col-2 pe-0">
+                    <input type="submit" value="댓글작성" class="btn btn-dark col-12">
+                </div>
+            </div>
+        </form>
+        <br>
+        <h3>댓글목록</h3>
+        <br>
+        {% for comment in comments %}
+        <div class='d-flex justify-content-between mb-3'>
+            <div>
+                <a href="{% url 'accounts:detail' comment.user.pk %}" class='btn btn-light'>{{ comment.user.username }}</a>  {{ comment.content }}
+            </div>
+                {% if request.user == comment.user %}
+                <a href="{% url 'articles:c_delete' article.pk comment.pk %}" class='btn btn-outline-danger text-end'>댓글삭제</a>
+                {% endif %}
+        </div>
+        {% endfor %}
+        <br>
         <div class="d-flex gap-1">
             <a href="{% url 'articles:update' article.pk %}" class='btn btn-primary col-4'>수정하기</a>
             <a href="{% url 'articles:delete' article.pk %}" class='btn btn-danger col-4'>삭제하기</a>
