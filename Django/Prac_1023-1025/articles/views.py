@@ -3,12 +3,13 @@ from django.shortcuts import render, redirect
 from .forms import ArticleForm, CommentForm
 from .models import Article, Comment
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def index(request):
     articles = Article.objects.order_by('-pk')
     # 페이지네이션
     page = request.GET.get('page')
-    paginator = Paginator(articles, 3)
+    paginator = Paginator(articles, 6)
     page_obj = paginator.get_page(page)
     context = {
         'articles' : articles,
@@ -17,6 +18,7 @@ def index(request):
     }
     return render(request, 'articles/index.html', context)
 
+@login_required
 def create(request):
     if request.method=='POST':
         category = request.POST.get('category')
@@ -54,6 +56,7 @@ def detail(request, pk):
     }
     return render(request, 'articles/detail.html', context)
 
+@login_required
 def update(request, pk):
     article = Article.objects.get(pk=pk)
     if request.method =='POST':
@@ -72,6 +75,7 @@ def update(request, pk):
     }
     return render(request, 'articles/update.html', context)
 
+@login_required
 def delete(request, pk):
     article = Article.objects.get(pk=pk)
     article.delete()
@@ -172,7 +176,7 @@ def search(request):
             title__contains=search
             )
     page = request.GET.get('page')
-    paginator = Paginator(articles, 3)
+    paginator = Paginator(articles, 6)
     page_obj = paginator.get_page(page)            
     context = {
         'articles' : articles,
@@ -187,7 +191,7 @@ def mainsearch(request):
     search = request.GET.get('mainsearch')
     articles = Article.objects.filter(title__contains=search) | Article.objects.filter(content__contains=search)
     page = request.GET.get('page')
-    paginator = Paginator(articles, 3)
+    paginator = Paginator(articles, 6)
     page_obj = paginator.get_page(page)  
     context = {
         'articles' : articles,
@@ -197,11 +201,13 @@ def mainsearch(request):
     }
     return render(request, 'articles/mainsearch.html', context)
 
+@login_required
 def c_delete(request, a_pk, c_pk):
     comment = Comment.objects.get(pk=c_pk)
     comment.delete()
     return redirect('articles:detail', a_pk)
 
+@login_required
 def like(request, pk):
     article = Article.objects.get(pk=pk)
     if article in request.user.like_articles.all():

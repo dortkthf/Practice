@@ -4,10 +4,12 @@
 <div class="d-flex justify-content-center">
     <div class="col-10 col-sm-7 my-5">
         <h1 class='text-center fw-bold mb-5'>자세한 내용</h1>
-        <hr>
-        {% if article.category %}
-        <p>{{ article.category }}</p>
-        {% endif %}
+        <br>
+        <div class="d-flex justify-content-between">
+            <p>{{ article.category }} | {{ article.created_at }}</p>
+            <p><a href="{% url 'accounts:detail' article.user.pk %}" class='btn btn-light'>{{ article.user }}</a></p>
+        </div>
+        <br>
         <h1>{{ article.title }}</h1>
         <p>{{ article.content }}</p>
         {% if article.image %}
@@ -50,9 +52,13 @@
         {% endfor %}
         <br>
         <div class="d-flex gap-1">
+            {% if request.user == article.user %}
             <a href="{% url 'articles:update' article.pk %}" class='btn btn-primary col-4'>수정하기</a>
             <a href="{% url 'articles:delete' article.pk %}" class='btn btn-danger col-4'>삭제하기</a>
             <a href="{% url 'articles:index' %}" class='btn btn-warning col-4'>홈으로</a>
+            {% else %}
+            <a href="{% url 'articles:index' %}" class='btn btn-warning col-12'>홈으로</a>
+            {% endif %}
         </div>
     </div>
 </div>

@@ -194,12 +194,21 @@
                 document.querySelector('#body').style.visibility ='hidden';
                 document.querySelector('#searchitems').style.visibility ='hidden';
             }
+            else {
+                document.querySelector('#body').style.visibility ='visible';
+                document.querySelector('#searchitems').style.visibility ='visible';
+            }
+
             document.getElementById("mySidenav").style.width = "250px";
             document.getElementById("main").style.marginLeft = "250px";
         }
         /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
         function closeNav() {
             if(window.innerWidth <600) {
+                document.querySelector('#body').style.visibility ='visible';
+                document.querySelector('#searchitems').style.visibility ='visible';
+            }
+            else {
                 document.querySelector('#body').style.visibility ='visible';
                 document.querySelector('#searchitems').style.visibility ='visible';
             }
