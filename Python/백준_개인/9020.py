@@ -1,23 +1,16 @@
 res = []
-for i in range(2,10001):
+for i in range(1,10001):
     for j in range(2,int(i**0.5)+1):
         if i%j == 0:
             break
     else:
         res.append(i)
-
 T = int(input())
+
 for _ in range(T):
     n = int(input())
-    cnt = []
-    r = []
-    for i in res:
-        if i>n/2:
+    a = n//2
+    for i in range(5000):
+        if i<n and a-i in res and a+i in res:
+            print(a-i,a+i)
             break
-        for j in res:
-            if i+j == n and i<=j:
-                r.append([i,j])
-                cnt.append(j-i)
-                break
-    a = cnt.index(min(cnt))
-    print(*r[a])
