@@ -6,6 +6,8 @@ chess = [list(0 for i in range(n)) for i in range(n)]
 d = [[-1,-1],[-1,1],[1,1],[1,-1],[-1,0],[1,0],[0,1],[0,-1]]
 
 def cross(x,y):
+    if sum(list(sum(i) for i in chess)) == n**2:
+        return
     chess[x][y] = 1 
     rx,ry = x,y
     for i in d:
@@ -28,6 +30,8 @@ res = 0
 cnt = 0
 def queen():
     global cnt, res
+    if sum(list(sum(i) for i in chess)) == n**2:
+        return
     for i in range(n):
         for j in range(n):
             if cnt == n:
