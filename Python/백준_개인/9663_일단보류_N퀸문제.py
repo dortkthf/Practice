@@ -1,48 +1,71 @@
+import sys
+sys.setrecursionlimit(10**8)
+
 n = int(input())
 
-chess = [list(0 for i in range(n)) for i in range(n)]
+chess = list(list(0 for i in range(n)) for i in range(n))
 
+d = [(-1,0),(-1,1),(0,1),(1,1),(1,0),(1,-1),(0,-1),(-1,-1)]
 
-d = [[-1,-1],[-1,1],[1,1],[1,-1],[-1,0],[1,0],[0,1],[0,-1]]
+def queens(r,c,i):
+    chess[r][c] = 1
+    if r+d[i][0]>=0 and r+d[i][0]<n and c+d[i][1]>=0 and c+d[i][1]<n:
+            r,c = r+d[i][0],c+d[i][1]
+            queens(r,c,i)
+            return
 
-def cross(x,y):
-    if sum(list(sum(i) for i in chess)) == n**2:
-        return
-    chess[x][y] = 1 
-    rx,ry = x,y
+def dqueens(r,c,i):
+    chess[r][c] = 0
+    if r+d[i][0]>=0 and r+d[i][0]<n and c+d[i][1]>=0 and c+d[i][1]<n:
+            r,c = r+d[i][0],c+d[i][1]
+            dqueens(r,c,i)
+            return
+
+def queen(r,c):
+    chess[r][c] = 1
+    br,bc = r,c
     for i in d:
-        x,y = rx,ry
-        while x+i[0] < n and y+i[1] < n and x+i[0] >=0 and y+i[1] >= 0:
-            chess[x+i[0]][y+i[1]] = 1
-            x = x+i[0]
-            y = y+i[1]
+        basei = d.index(i)
+        r,c = br,bc
+        if r+i[0]>=0 and r+i[0]<n and c+i[1]>=0 and c+i[1]<n:
+            r,c = r+i[0],c+i[1]
+            queens(r,c,basei)
+            continue
+    return
 
-def decross(x,y):
-    chess[x][y] = 0 
-    rx,ry = x,y
+def dqueen(r,c):
+    chess[r][c] = 0
+    br,bc = r,c
     for i in d:
-        x,y = rx,ry
-        while x+i[0] < n and y+i[1] < n and x+i[0] >=0 and y+i[1] >= 0:
-            chess[x+i[0]][y+i[1]] = 0
-            x = x+i[0]
-            y = y+i[1]
+        basei = d.index(i)
+        r,c = br,bc
+        if r+i[0]>=0 and r+i[0]<n and c+i[1]>=0 and c+i[1]<n:
+            r,c = r+i[0],c+i[1]
+            dqueens(r,c,basei)
+            continue
+    return
+
 res = 0
 cnt = 0
-def queen():
-    global cnt, res
-    if sum(list(sum(i) for i in chess)) == n**2:
-        return
+
+def sol():
+    global cnt
+    global res
     for i in range(n):
         for j in range(n):
             if cnt == n:
                 res+=1
-                return
-            if chess[i][j] == 0:
-                cnt+=1
-                cross(i,j)
-                queen()
-                decross(i,j)
                 cnt-=1
+                dqueen(i,j)
+                return
+            else:
+                if chess[i][j] == 0:
+                    queen(i,j)
+                    cnt+=1
+                    sol()
+                    cnt-=1
+            dqueen(i,j)
+            continue
+    return
 
-queen()
-print(res)
+print(sol())
