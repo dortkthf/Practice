@@ -1,3 +1,3 @@
-2 1 4 5 1 3 3
-
-stack = [0]
+n = int(input())
+numbers = list(int(input()) for i in range(n))
+print(numbers)
