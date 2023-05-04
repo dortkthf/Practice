@@ -38,5 +38,5 @@ while queue:
                 if maps[ny][nx] == 0:
                     bcheck[ny][nx] = 1
                     queue.append((ny,nx,num+1,bk))
-                
+
 print(-1)
